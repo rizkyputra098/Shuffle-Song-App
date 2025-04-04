@@ -64,6 +64,7 @@ flutter:
     - assets/images/honne.jpeg
     - assets/images/maroon5.jpeg
     - assets/images/nadin_amizah.jpeg
+    - assets/images/spotify.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

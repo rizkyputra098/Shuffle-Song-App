@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,8 +21,41 @@ class ShuffleSongApp extends StatelessWidget {
   }
 }
 
-class ShuffleSongWidget extends StatelessWidget {
+const albumCoverList = [
+  "assets/images/bruno_major.jpeg",
+  "assets/images/coldplay.jpeg",
+  "assets/images/hindia.jpeg",
+  "assets/images/honne.jpeg",
+  "assets/images/maroon5.jpeg",
+  "assets/images/nadin_amizah.jpeg",
+];
+
+const albumtitle = [
+  "Nothing - Bruno Major",
+  "Fix YOu - Coldplay",
+  "Kita Ke sana - HIndia",
+  "By My Side - Honne",
+  "Sad - Maroon 5",
+  "Mendarah - Nadin",
+];
+
+class ShuffleSongWidget extends StatefulWidget {
   const ShuffleSongWidget({super.key});
+
+  @override
+  State<ShuffleSongWidget> createState() => _ShuffleSongWidgetState();
+}
+
+class _ShuffleSongWidgetState extends State<ShuffleSongWidget> {
+  int _currentIndex = 0;
+
+  void _shuffelSong() {
+    Random random = Random();
+    int randomIndex = random.nextInt(6);
+    setState(() {
+      _currentIndex = randomIndex;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +68,8 @@ class ShuffleSongWidget extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Image.asset(
                 "assets/images/spotify.png",
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
               ),
               SizedBox(
                 width: 10,
@@ -61,7 +96,7 @@ class ShuffleSongWidget extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Image.asset(
-                      "assets/images/hindia.jpeg",
+                      albumCoverList[_currentIndex],
                       width: 200,
                       height: 200,
                     ),
@@ -69,8 +104,8 @@ class ShuffleSongWidget extends StatelessWidget {
                       height: 5,
                     ),
                     Text(
-                      "KIta kesana - Hindia",
-                      style: TextStyle(
+                      albumtitle[_currentIndex],
+                      style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
@@ -81,10 +116,15 @@ class ShuffleSongWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(
-              Icons.shuffle_on_rounded,
-              color: const Color.fromARGB(255, 0, 255, 34),
-              size: 45,
+            Center(
+              child: IconButton(
+                onPressed: _shuffelSong,
+                icon: const Icon(
+                  Icons.shuffle_on_rounded,
+                  color: Color.fromARGB(255, 0, 255, 34),
+                  size: 45,
+                ),
+              ),
             ),
           ],
         ),
